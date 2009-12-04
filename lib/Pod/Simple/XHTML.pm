@@ -213,6 +213,7 @@ sub new {
   $new->{'output_fh'} ||= *STDOUT{IO};
   $new->accept_targets( 'html', 'HTML' );
   $new->perldoc_url_prefix('http://search.cpan.org/perldoc?');
+  $new->man_url_prefix('http://man.he.net/man');
   $new->html_header_tags('<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />');
   $new->nix_X_codes(1);
   $new->codes_in_verbatim(1);
@@ -510,6 +511,11 @@ sub start_L {
       $url .= $self->perldoc_url_postfix || '';
 #    require Data::Dumper;
 #    print STDERR Data::Dumper->Dump([$flags]);
+    } elsif ($flags->{'type'} eq 'man') {
+      my ($page, $section) = $flags->{to} =~ /^([^(]+)(?:[(](\d+)[)])?$/;
+      $url .= $self->man_url_prefix || '';
+      $url .= "$section/" . encode_entities $page;
+      $url .= $self->man_url_postfix || '';
     }
 
     $self->{'scratch'} .= '<a href="'. $url . '">';
