@@ -388,7 +388,7 @@ sub end_item_text   {
 }
 
 # This handles =begin and =for blocks of all kinds.
-sub start_for { 
+sub start_for {
   my ($self, $flags) = @_;
 
   push @{ $self->{__region_targets} }, $flags->{target_matching};
@@ -402,7 +402,7 @@ sub start_for {
   $self->emit;
 
 }
-sub end_for { 
+sub end_for {
   my ($self) = @_;
 
   $self->{'scratch'} .= '</div>' unless $self->__in_literal_xhtml_region;
@@ -411,7 +411,7 @@ sub end_for {
   $self->emit;
 }
 
-sub start_Document { 
+sub start_Document {
   my ($self) = @_;
   if (defined $self->html_header) {
     $self->{'scratch'} .= $self->html_header;
@@ -423,7 +423,7 @@ sub start_Document {
     $metatags = $self->html_header_tags || '';
     if ($self->html_css) {
       $metatags .= "\n<link rel='stylesheet' href='" .
-             $self->html_css . "' type='text/css'>";
+             $self->html_css . "' type='text/css' />";
     }
     if ($self->html_javascript) {
       $metatags .= "\n<script type='text/javascript' src='" .
