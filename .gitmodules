@@ -1,0 +1,3 @@
+[submodule "ext/Pod-Simple"]
+	path = ext/Pod-Simple
+	url = git://github.com/theory/pod-simple.git
